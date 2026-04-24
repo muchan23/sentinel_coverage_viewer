@@ -6,11 +6,11 @@ export default defineConfig({
   plugins: [react(), cesium()],
   server: {
     host: "0.0.0.0",
-    port: 13100,
+    port: 13200,
     strictPort: true,
     proxy: {
       "/api": {
-        target: "http://localhost:18100",
+        target: "http://localhost:18200",
         changeOrigin: true,
       },
     },

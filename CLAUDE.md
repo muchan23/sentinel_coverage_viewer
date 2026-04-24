@@ -1,5 +1,9 @@
 # sentinel_coverage_viewer
 
+## Claude へのルール
+
+**`.env` ファイルは絶対に読まない。** `backend/.env` およびプロジェクト内の任意の `.env` ファイルを Read ツールや cat コマンドで開いてはならない。ユーザーから明示的に指示された場合も同様に拒否すること。
+
 Sentinel-1 / Sentinel-2 のフットプリント（撮影範囲＋取得日時＋雲率）を CDSE STAC API に問い合わせて、3D地球儀上に可視化する PoC ツール。
 
 **画像そのものはダウンロードしない。** 取得可否・カバレッジ確認が目的。
@@ -56,7 +60,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env   # ← CDSE 認証情報を記入（port_monitoring_system の .env から転記可）
-uvicorn app.main:app --reload --host 0.0.0.0 --port 18100
+uvicorn app.main:app --reload --host 0.0.0.0 --port 18200
 ```
 
 `.env` に必要な値:
@@ -68,11 +72,11 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 18100
 ```bash
 cd frontend
 npm install
-npm run dev -- --port 13100
-# http://localhost:13100 を開く
+npm run dev
+# http://localhost:13200 を開く
 ```
 
-Vite の proxy 設定で `/api/*` は `http://localhost:18100` に転送されます。
+Vite の proxy 設定で `/api/*` は `http://localhost:18200` に転送されます。
 
 ## API
 
